@@ -108,6 +108,6 @@ public Product(String name, String category, Double price, String sku) {
 }
 
 public String toString() { 
-    return "Product{" + "id=" + id + ", name='" + name + ''' + ", category='" + category + ''' + ", price=" + price + ", sku='" + sku + ''' + '}'; 
+    return "Product{" + "id=" + id + ", name='" + name + "'" + ", category='" + category + "'" + ", price=" + price + ", sku='" + sku + "'" + "}"; 
 } 
 }
