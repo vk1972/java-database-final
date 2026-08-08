@@ -60,7 +60,8 @@ private String comment; // Optional comment on the product
 // 8. Add constructor:
 //    - The constructor should accept values for customerId, productId, storeId, rating, and an optional comment.
 
-// Constructors public Review() { }
+// Constructors 
+public Review() { }
 
 public Review(Long customerId, Long productId, Long storeId, Integer rating, String comment) { 
     this.customerId = customerId; 
