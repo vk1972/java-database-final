@@ -91,7 +91,8 @@ public void setOrders(List orders) { this.orders = orders; }
 //    - Use @NotNull for fields that cannot be empty like 'name', 'email', and 'phone'.
 //    - Make sure you add the correct annotations for entity mapping and relationship management like @Entity, @Id, @GeneratedValue, @OneToMany, and @JsonManagedReference.
 
-// Constructors (if necessary) public Customer() {}
+// Constructors (if necessary) 
+public Customer() {}
 
 public Customer(String name, String email, String phone) { 
     this.name = name; 

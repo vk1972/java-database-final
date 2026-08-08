@@ -76,7 +76,8 @@ private List orderItems;
 // 7. Add constructors:
 //    - A no-argument constructor.
 //    - A parameterized constructor that accepts Customer, Store, totalPrice, and date as parameters.
-// Constructors (if necessary) public OrderDetails() {}
+// Constructors (if necessary) 
+public OrderDetails() {}
 public OrderDetails(Customer customer, Store store, Double totalPrice, LocalDateTime date) {
     this.customer = customer; 
     this.store = store; 

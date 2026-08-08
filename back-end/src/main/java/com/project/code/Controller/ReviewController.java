@@ -51,6 +51,7 @@ List<Map<String, Object>> reviewsWithCustomerNames = new ArrayList<>();
 
 // For each review, fetch customer details and add them to the response 
 for (Review review : reviews) { 
+    
     Map<String, Object> reviewMap = new HashMap<>(); 
     reviewMap.put("review", review.getComment()); 
     reviewMap.put("rating", review.getRating());
