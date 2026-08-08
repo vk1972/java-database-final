@@ -13,25 +13,23 @@ public class ServiceClass {
     private final InventoryRepository inventoryRepository; 
     private final ProductRepository productRepository;
 
-    public ServiceClass(InventoryRepository inventoryRepository, ProductRepository productRepository) {       
-        this.inventoryRepository = inventoryRepository; 
-        this.productRepository=productRepository; 
-    }
+    public ServiceClass(InventoryRepository inventoryRepository,ProductRepository productRepository)  {      this.inventoryRepository = inventoryRepository; 
+       this.productRepository=productRepository; 
+   }
 
-    public boolean validateInventory(Inventory inventory) 
-    { 
-    Inventory                                                                                                     result=inventoryRepository.findByProductIdandStoreId(inventory.getProduct().getId(),inventory.getStore().getId()); 
+    public boolean validateInventory(Inventory inventory) { 
+        Inventory result=inventoryRepository.findByProductIdAndStoreId(inventory.getProduct().getId(),inventory.getStore().getId());       
         if(result!=null) { 
             return false; 
         } 
         return true; 
-    }
+     }
 
     public boolean validateProduct(Product product) { 
         Product result=productRepository.findByName(product.getName()); 
-        if(result!=null) { return false; 
-        } 
-        return true; 
+        if(result!=null) { 
+            return false; 
+        } return true; 
     }
 
     public boolean ValidateProductId(long id) { 
@@ -39,12 +37,13 @@ public class ServiceClass {
         System.out.println(result); 
         if(result==null) { 
            return false; 
-        } return true; 
+        } 
+        return true; 
     }
 
     public Inventory getInventoryId(Inventory inventory) { 
-        Inventory result=inventoryRepository.findByProductIdandStoreId(inventory.getProduct().getId(),inventory.getStore().getId());
+       Inventory result=inventoryRepository.findByProductIdAndStoreId(inventory.getProduct().getId(),inventory.getStore().getId());
 
-    	return result; 
-     } 
- }
+       return result; 
+    } 
+}

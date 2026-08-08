@@ -179,7 +179,7 @@ public Map<String, String> removeProduct(@PathVariable Long id) {
 //    - If sufficient stock is available, return `true`; otherwise, return `false`.
 @GetMapping("validate/{quantity}/{storeId}/{productId}") 
 public boolean validateQuantity(@PathVariable int quantity, @PathVariable long storeId, @PathVariable long productId) { 
-     Inventory result = inventoryRepository.findByProductIdandStoreId(productId, storeId); 
+     Inventory result = inventoryRepository.findByProductIdAndStoreId(productId, storeId); 
      if (result.getStockLevel() >= quantity) { 
           return true; 
      } 

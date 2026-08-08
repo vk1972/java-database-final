@@ -40,9 +40,10 @@ public class OrderService {
     @Autowired 
     private OrderItemRepository orderItemRepository;
 
-    // 1. Retrieve or create the Customer
-    public void saveOrder(PlaceOrderRequestDTO placeOrderRequest) {
     
+    public void saveOrder(PlaceOrderRequestDTO placeOrderRequest) {
+        
+        // 1. Retrieve or create the Customer
 	    Customer existingCustomer = customerRepository.findByEmail(placeOrderRequest.getCustomerEmail()); 
 	
         Customer customer = new Customer();
@@ -74,7 +75,7 @@ public class OrderService {
             PurchaseProductDTO productDTO = (PurchaseProductDTO)productDTO1;
 		    OrderItem orderItem = new OrderItem();
 	
-	        Inventory inventory =inventoryRepository.findByProductIdandStoreId(productDTO.getId(),placeOrderRequest.getStoreId());
+	        Inventory inventory =inventoryRepository.findByProductIdAndStoreId(productDTO.getId(),placeOrderRequest.getStoreId());
 
 	        inventory.setStockLevel(inventory.getStockLevel()-productDTO.getQuantity());
 	        inventoryRepository.save(inventory);
