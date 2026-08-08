@@ -70,7 +70,8 @@ public class OrderService {
 
 	// 4. Create and save OrderItems (products purchased) 
 	List purchaseProducts = placeOrderRequest.getPurchaseProduct(); 
-	for (PurchaseProductDTO productDTO : purchaseProducts) { 
+	for (Object productDTO1 : purchaseProducts) { 
+        PurchaseProductDTO productDTO = (PurchaseProductDTO)productDTO1;
 		OrderItem orderItem = new OrderItem();
 	
 	    Inventory inventory =inventoryRepository.findByProductIdandStoreId(productDTO.getId(),placeOrderRequest.getStoreId());

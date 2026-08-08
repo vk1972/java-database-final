@@ -50,7 +50,8 @@ public Map<String,Object> getReviews(@PathVariable long storeId, @PathVariable l
 List<Map<String, Object>> reviewsWithCustomerNames = new ArrayList<>();
 
 // For each review, fetch customer details and add them to the response 
-for (Review review : reviews) { 
+for (Object review1 : reviews) { 
+    Review review = (Review)review1;
     
     Map<String, Object> reviewMap = new HashMap<>(); 
     reviewMap.put("review", review.getComment()); 
