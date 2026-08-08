@@ -43,48 +43,50 @@ public class OrderService {
     // 1. Retrieve or create the Customer
     public void saveOrder(PlaceOrderRequestDTO placeOrderRequest) {
     
-	Customer existingCustomer = customerRepository.findByEmail(placeOrderRequest.getCustomerEmail()); 
+	    Customer existingCustomer = customerRepository.findByEmail(placeOrderRequest.getCustomerEmail()); 
 	
         Customer customer = new Customer();
         customer.setName(placeOrderRequest.getCustomerName()); 
         customer.setEmail(placeOrderRequest.getCustomerEmail());
-	customer.setPhone(placeOrderRequest.getCustomerPhone());
+	    customer.setPhone(placeOrderRequest.getCustomerPhone());
 
-	if (existingCustomer == null) { 
-	     customer = customerRepository.save(customer); 
-	} else{ 
-	     customer=existingCustomer; 
-	}
+	    if (existingCustomer == null) { 
+	        customer = customerRepository.save(customer); 
+	    } else{ 
+	        customer = existingCustomer; 
+	    }
 
-	// 2. Retrieve the Store 
-	Store store = storeRepository.findById(placeOrderRequest.getStoreId()).orElseThrow(() -> new RuntimeException("Store not found"));
+	    // 2. Retrieve the Store 
+	    Store store = storeRepository.findById(placeOrderRequest.getStoreId()).orElseThrow(() -> new RuntimeException("Store not found"));
 
-	// 3. Create OrderDetails 
-	OrderDetails orderDetails = new OrderDetails(); 
-	orderDetails.setCustomer(customer); 
-	orderDetails.setStore(store); 
-	orderDetails.setTotalPrice(placeOrderRequest.getTotalPrice());    
+	    // 3. Create OrderDetails 
+	    OrderDetails orderDetails = new OrderDetails(); 
+	    orderDetails.setCustomer(customer); 
+	    orderDetails.setStore(store); 
+	    orderDetails.setTotalPrice(placeOrderRequest.getTotalPrice());    
         orderDetails.setDate(java.time.LocalDateTime.now()); // Use current datetime
 
-	orderDetails = orderDetailsRepository.save(orderDetails);
+	    orderDetails = orderDetailsRepository.save(orderDetails);
 
-	// 4. Create and save OrderItems (products purchased) 
-	List purchaseProducts = placeOrderRequest.getPurchaseProduct(); 
-	for (Object productDTO1 : purchaseProducts) { 
-        PurchaseProductDTO productDTO = (PurchaseProductDTO)productDTO1;
-		OrderItem orderItem = new OrderItem();
+	    // 4. Create and save OrderItems (products purchased) 
+	    List purchaseProducts = placeOrderRequest.getPurchaseProduct(); 
+	    for (Object productDTO1 : purchaseProducts) { 
+            PurchaseProductDTO productDTO = (PurchaseProductDTO)productDTO1;
+		    OrderItem orderItem = new OrderItem();
 	
-	    Inventory inventory =inventoryRepository.findByProductIdandStoreId(productDTO.getId(),placeOrderRequest.getStoreId());
+	        Inventory inventory =inventoryRepository.findByProductIdandStoreId(productDTO.getId(),placeOrderRequest.getStoreId());
 
-	    inventory.setStockLevel(inventory.getStockLevel()-productDTO.getQuantity());
-	    inventoryRepository.save(inventory);
+	        inventory.setStockLevel(inventory.getStockLevel()-productDTO.getQuantity());
+	        inventoryRepository.save(inventory);
 
-	    orderItem.setOrder(orderDetails); // Link the order to the order item
+	        orderItem.setOrder(orderDetails); // Link the order to the order item
 
-	    orderItem.setProduct(productRepository.findByid(productDTO.getId()));
+	        orderItem.setProduct(productRepository.findByid(productDTO.getId()));
 
-	    orderItem.setQuantity(productDTO.getQuantity());
-	    orderItem.setPrice(productDTO.getPrice()*productDTO.getQuantity());
+	        orderItem.setQuantity(productDTO.getQuantity());
+	        orderItem.setPrice(productDTO.getPrice()*productDTO.getQuantity());
 
-	    orderItemRepository.save(orderItem); // Save OrderItem 
-	} } } 
+	        orderItemRepository.save(orderItem); // Save OrderItem 
+	    } 
+    } 
+} 
