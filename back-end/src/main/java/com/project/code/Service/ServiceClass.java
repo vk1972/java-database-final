@@ -13,7 +13,8 @@ public class ServiceClass {
     private final InventoryRepository inventoryRepository; 
     private final ProductRepository productRepository;
 
-    public ServiceClass(InventoryRepository inventoryRepository,ProductRepository productRepository {       this.inventoryRepository = inventoryRepository; 
+    public ServiceClass(InventoryRepository inventoryRepository, ProductRepository productRepository) {       
+        this.inventoryRepository = inventoryRepository; 
         this.productRepository=productRepository; 
     }
 
