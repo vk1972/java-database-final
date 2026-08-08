@@ -49,7 +49,7 @@ private String address;
 //    - Use @JsonManagedReference("inventory-store") to manage bidirectional relationships and avoid circular references.
 @OneToMany(mappedBy = "store", fetch = FetchType.EAGER) 
 @JsonManagedReference("inventory-store") 
-private List inventory;
+private List<Inventory>  inventory;
 
 
 

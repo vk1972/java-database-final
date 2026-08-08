@@ -57,7 +57,7 @@ private String phone;
 
     @OneToMany(mappedBy = "customer",fetch = FetchType.EAGER) 
     @JsonManagedReference 
-    private List orders;
+    private List<OrderDetails> orders;
 
 
 // 6. Getters and Setters:

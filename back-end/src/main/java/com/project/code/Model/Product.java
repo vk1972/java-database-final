@@ -67,7 +67,7 @@ private String sku;
 //    - Use @JsonManagedReference("inventory-product") to manage bidirectional relationships and avoid circular references.
 @OneToMany(mappedBy = "product", fetch = FetchType.EAGER) 
 @JsonManagedReference("inventory-product") 
-private List inventory;
+private List<Inventory>  inventory;
 
 
 // 8. Add Getters and Setters:

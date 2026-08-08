@@ -48,7 +48,8 @@ private Customer customer;
 //    - Apply @JsonManagedReference to handle bidirectional relationships and JSON serialization.
 @ManyToOne 
 @JoinColumn(name = "store_id") 
-@JsonManagedReference private Store store;
+@JsonManagedReference 
+private Store store;
 
 
 
@@ -71,7 +72,7 @@ private LocalDateTime date;
 //    - Apply @JsonManagedReference to prevent circular references during JSON serialization.
 @OneToMany(mappedBy = "order",fetch = FetchType.EAGER) 
 @JsonManagedReference 
-private List orderItems;
+private List<OrderItem> orderItems;
 
 // 7. Add constructors:
 //    - A no-argument constructor.
