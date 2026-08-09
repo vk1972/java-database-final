@@ -4,7 +4,7 @@ DELIMITER $$
      BEGIN
          SELECT od.storei​d, SUM(DISTINCT od.totalp​rice) AS totals​ales,
          MONTH(od.date) AS salem​onth, YEAR(od.date) AS saley​ear
-         FROM orderd​etails od JOIN orderi​tem oi ON od.id=oi.orderi​d 
+         FROM order_d​etails od JOIN order_i​tem oi ON od.id=oi.orderi​d 
          WHERE YEAR(od.date)=yearp​aram AND MONTH(od.date)=monthp​aram 
          GROUP BY od.storei​d, MONTH(od.date), YEAR(od.date)
          ORDER BY totals​ales DESC;
