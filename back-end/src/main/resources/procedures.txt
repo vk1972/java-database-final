@@ -52,3 +52,30 @@ CREATE PROCEDURE GetTopSellingProductsByCategory(IN targetm​onth INT, IN targe
     END$$
 
 DELIMITER ; 
+
+
+DELIMITER $$
+
+CREATE PROCEDURE GetTopSellingProductByStore(IN targetm​onth INT, IN targety​ear INT)
+    BEGIN
+        SELECT p.name AS productn​ame, od.store_i​d, SUM(oi.quantity) AS totalq​uantitys​old, SUM(oi.price * oi.quantity) AS totals​ales
+          FROM product p
+          JOIN order_i​tem oi ON p.id = oi.product_i​d
+          JOIN order_d​etails od ON oi.order_i​d = od.id 
+         WHERE MONTH(od.date) = targetm​onth AND YEAR(od.date) = targety​ear
+         GROUP BY od.store_i​d, p.name 
+        HAVING SUM(oi.quantity) = 
+                 (SELECT MAX(totalq​uantity) 
+                    FROM 
+                      (SELECT SUM(oi2.quantity) AS totalq​uantity 
+                         FROM order_i​tem oi2 
+                         JOIN order_d​etails od2 ON oi2.order_i​d = od2.id 
+                         JOIN product p2 ON oi2.product_i​d = p2.id 
+                        WHERE MONTH(od2.date) = targetm​onth AND YEAR(od2.date) = targety​ear 
+                          AND od2.store_i​d = od.store_i​d
+                        GROUP BY p2.name
+                      ) AS Subquery 
+                 ) ORDER BY od.store_i​d;
+END$$
+
+DELIMITER ; 
