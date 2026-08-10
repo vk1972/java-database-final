@@ -19,7 +19,8 @@ public interface InventoryRepository extends JpaRepository<Inventory, Long> {
 
 	List findByStore_Id(Long storeId);
 
-	@Modifying @Transactional 
+	@Modifying 
+	@Transactional 
 	@Query("DELETE FROM Inventory i WHERE i.product.id = :productId") 
 	void deleteByProductId(Long productId);
 } 
